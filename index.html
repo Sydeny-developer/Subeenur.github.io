@@ -971,7 +971,25 @@
         }
     </style>
 </head>
+    
 <body>
+    <h2>我的日志</h2>
+<div id="journal">加载中...</div>
+
+<script>
+// 用你刚才复制的页面 ID 替换下面这行
+fetch('https://notion-api.splitbee.io/v1/table/pages-2350b1ac154e806ab572f84019608b7f')
+  .then(res => res.json())
+  .then(data => {
+    const html = data.reverse().map(row => `
+      <div style="margin:20px 0;">
+        <strong>${row.Date}</strong><br>
+        ${row.Content}
+      </div>
+    `).join('');
+    document.getElementById('journal').innerHTML = html;
+  });
+</script>
     <div class="content-wrapper">
         <header>
             <div class="header-top">
