@@ -1186,12 +1186,13 @@
             });
         });
     </script>
- <script>
+<!-- 日志展示区 -->
+<h2>我的日志</h2>
+<div id="journal">加载中...</div>
+<script>
+// ⚠️ 把「你的页面ID」替换成真正的那段字符
 fetch('https://notion-api.splitbee.io/v1/table/2350b1ac154e806ab572f84019608b7f')
-  .then(res => {
-    if (!res.ok) throw new Error('API 404');
-    return res.json();
-  })
+  .then(res => res.json())
   .then(data => {
     const html = data.reverse().map(row => `
       <div style="margin:20px 0;">
@@ -1201,9 +1202,10 @@ fetch('https://notion-api.splitbee.io/v1/table/2350b1ac154e806ab572f84019608b7f'
     `).join('');
     document.getElementById('journal').innerHTML = html;
   })
-  .catch(err => {
-    document.getElementById('journal').textContent = '读取日志失败：' + err.message;
+  .catch(() => {
+    document.getElementById('journal').textContent = '读取日志失败，请检查网络或页面ID';
   });
 </script>
 </body>
-</html> 
+</html>
+
